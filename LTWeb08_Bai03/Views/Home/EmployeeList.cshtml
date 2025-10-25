@@ -1,0 +1,67 @@
+﻿@model List<LTWeb08_Bai03.Models.DepartmentEmployeeViewModel>
+
+@{
+    ViewBag.Title = "BẢNG EMPLOYEE";
+}
+
+<div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+        <h3>Danh Sách Phòng Ban</h3>
+        <ul class="list-group">
+            @foreach (var dept in ViewBag.Departments as List<LTWeb08_Bai03.Models.DanhSachTenPB>)
+            {
+                <li class="list-group-item">
+                    @Html.ActionLink(dept.Name, "EmployeeList", new { deptId = dept.DeptId })
+                </li>
+            }
+        </ul>
+        <div style="margin-top:20px;">
+            @Html.ActionLink("Go Back Department List", "DepartmentList", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+        <h2 style="text-align:center;">BẢNG EMPLOYEE</h2>
+        <table class="table table-bordered table-striped" style="width:100%; text-align:center;">
+            <thead style="background-color:#f0f0f0;">
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Họ và Tên</th>
+                    <th>Giới Tính</th>
+                    <th>Thành Phố</th>
+                    <th>Ảnh</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Gender</td>
+                        <td>@item.City</td>
+                        <td>
+                            <img src="@Url.Content("~/Content/Images/" + item.Id + ".jpg")"
+                                 alt="Ảnh nhân viên"
+                                 width="120"
+                                 height="120"
+                                 class="img-thumbnail"
+                                 onerror="this.src='@Url.Content("~/Content/Images/default.jpg")'" />
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="margin-top:20px; text-align:center;">
+            @Html.ActionLink("Back to List", "EmployeeList", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>

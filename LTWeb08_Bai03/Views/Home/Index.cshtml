@@ -1,0 +1,45 @@
+﻿@model IEnumerable<LTWeb08_Bai03.Models.tbl_Employee>
+
+@{
+    ViewBag.Title = "BẢNG EMPLOYEE";
+}
+
+<h2 style="text-align:center;">BẢNG EMPLOYEE</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table table-bordered table-striped" style="width:100%; text-align:center;">
+    <thead style="background-color:#f0f0f0;">
+        <tr>
+            <th>Mã NV</th>
+            <th>Họ và Tên</th>
+            <th>Giới Tính</th>
+            <th>Thành Phố</th>
+            <th>Ảnh</th>
+            <th>Phòng Ban</th>
+            <th>Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Gender</td>
+                <td>@item.City</td>
+                <td>
+                    <img src="@Url.Content("~/Content/Images/" + item.Id + ".jpg")" alt="Ảnh nhân viên" style="width:100px; height:auto;" />
+                </td>
+                <td>@(item.tbl_Deparment != null ? item.tbl_Deparment.Name : "")</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

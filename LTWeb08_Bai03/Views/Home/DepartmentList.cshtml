@@ -1,0 +1,19 @@
+﻿@model List<LTWeb08_Bai03.Models.DanhSachTenPB>
+
+@{
+    ViewBag.Title = "Danh Sách Phòng Ban";
+}
+
+<h2 style="text-align:center;">DANH SÁCH PHÒNG BAN</h2>
+<ul class="list-group" style="width: 300px; margin: 20px auto;">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            @Html.ActionLink(item.Name, "EmployeeList", new { deptId = item.DeptId })
+        </li>
+    }
+</ul>
+
+<div style="text-align:center; margin-top:20px;">
+    @Html.ActionLink("Show Employee Parameter", "EmployeeList", null, new { @class = "btn btn-default" })
+</div>

@@ -1,0 +1,46 @@
+﻿@model List<LTWeb08_Bai03.Models.DepartmentEmployeeViewModel>
+
+@{
+    ViewBag.Title = "BẢNG EMPLOYEE - DEPARTMENT";
+}
+
+<h2 style="text-align:center;">BẢNG EMPLOYEE - DEPARTMENT</h2>
+
+<table class="table table-bordered table-striped" style="width:100%; text-align:center;">
+    <thead style="background-color:#f0f0f0;">
+        <tr>
+            <th>Mã NV</th>
+            <th>Họ và Tên</th>
+            <th>Giới Tính</th>
+            <th>Thành Phố</th>
+            <th>Ảnh</th>
+            <th>Mã PB</th>
+            <th>Tên PB</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Gender</td>
+                <td>@item.City</td>
+                <td>
+                    <img src="@Url.Content("~/Content/Images/" + item.Id + ".jpg")"
+                         alt="Ảnh nhân viên"
+                         width="120"
+                         height="120"
+                         class="img-thumbnail"
+                         onerror="this.src='@Url.Content("~/Content/Images/default.jpg")'" />
+                </td>
+                <td>@item.DeptId</td>
+                <td>@item.DeptName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="margin-top:20px;">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</div>
